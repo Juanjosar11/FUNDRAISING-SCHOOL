@@ -11,6 +11,8 @@ interface ButtonProps {
   icon?: React.ReactNode;
   className?: string;
   disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  target?: '_blank' | '_self';
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -22,6 +24,8 @@ const Button: React.FC<ButtonProps> = ({
   icon,
   className = '',
   disabled = false,
+  type = 'button',
+  target,
 }) => {
   const baseClasses = `
     inline-flex items-center justify-center gap-2 
@@ -74,7 +78,7 @@ const Button: React.FC<ButtonProps> = ({
       return (
         <motion.a
           href={href}
-          target="_blank"
+          target={target || "_blank"}
           rel="noopener noreferrer"
           className={classes}
           whileHover={{ scale: 1.02 }}
@@ -101,6 +105,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <motion.button
+      type={type}
       className={classes}
       onClick={onClick}
       disabled={disabled}
